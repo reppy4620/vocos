@@ -31,6 +31,7 @@ class ConvNeXtLayer(nn.Module):
 class Vocos(nn.Module):
     def __init__(self, in_channel, channel, h_channel, out_channel, num_layers, istft_config):
         super().__init__()
+        self.pad = nn.ReflectionPad1d([1, 0])
         self.in_conv = nn.Conv1d(in_channel, channel, kernel_size=7, padding=3)
         self.norm = nn.LayerNorm(channel)
         scale = 1 / num_layers
@@ -41,17 +42,16 @@ class Vocos(nn.Module):
             ]
         )
         self.norm_last = nn.LayerNorm(channel)
-        self.pad = nn.ReflectionPad1d([1, 0])
         self.out_conv = nn.Conv1d(channel, out_channel, 1)
         self.istft = InverseSpectrogram(**istft_config)
 
     def forward(self, x):
+        x = self.pad(x)
         x = self.in_conv(x)
         x = self.norm(x.transpose(1, 2)).transpose(1, 2)
         for layer in self.layers:
             x = layer(x)
         x = self.norm_last(x.transpose(1, 2)).transpose(1, 2)
-        x = self.pad(x)
         x = self.out_conv(x)
         mag, phase = x.chunk(2, dim=1)
         mag = torch.exp(mag).clamp_max(max=1e2)
