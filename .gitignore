@@ -1,0 +1,7 @@
+data/
+downloads/
+out/
+/*.ipynb
+__pycache__
+src/test.py
+src/test.ipynb
