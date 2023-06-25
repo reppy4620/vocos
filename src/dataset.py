@@ -20,7 +20,7 @@ class AudioDataset(torch.utils.data.Dataset):
 
         wav, _ = torchaudio.load(self.wav_dir / f'{bname}.wav')
         if wav.shape[-1] > self.segment_size:
-            s = random.randint(0, wav.shape[-1] - self.segment_size)
+            s = random.randint(0, wav.shape[-1] - self.segment_size - 1)
             e = s + self.segment_size
             wav = wav[:, s:e]
         elif wav.shape[-1] < self.segment_size:
