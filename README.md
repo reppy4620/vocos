@@ -1,6 +1,6 @@
 # Vocos
 
-My implementation of HiFi-GAN([paper](https://arxiv.org/abs/2306.00814)) for JSUT([link](https://sites.google.com/site/shinnosuketakamichi/publication/jsut)) powerd by lightning.
+My implementation of Vocos([paper](https://arxiv.org/abs/2306.00814)) for JSUT([link](https://sites.google.com/site/shinnosuketakamichi/publication/jsut)) powerd by lightning.
 
 
 # Usage
@@ -20,7 +20,6 @@ cd scripts
 ```
 
 # Requirements
-if you wanna plot loss, pandas is needed for aggregate csv.
 
 ```sh
 pip install torch torchaudio lightning pandas
