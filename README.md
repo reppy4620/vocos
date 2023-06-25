@@ -27,6 +27,12 @@ pip install torch torchaudio lightning pandas
 
 # Result
 
+Trained model is in  following link. 
+
+[https://huggingface.co/reppy4620/vocos/blob/main/jsut_1000.ckpt](https://huggingface.co/reppy4620/vocos/blob/main/jsut_1000.ckpt)
+
+It contains model weights as well as some training info.
+
 Some audio samples are in `asset/sample`.
 
 | loss | plot |
@@ -35,4 +41,3 @@ Some audio samples are in `asset/sample`.
 | Generator | ![](./asset/loss/gen.png) |
 | Feature Matching | ![](./asset/loss/fm.png) |
 | Mel | ![](./asset/loss/mel.png) |
-
