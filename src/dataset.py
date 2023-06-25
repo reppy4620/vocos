@@ -6,7 +6,7 @@ import torchaudio
 from pathlib import Path
 
 
-class TextAudioDataset(torch.utils.data.Dataset):
+class AudioDataset(torch.utils.data.Dataset):
     def __init__(self, file_path, wav_dir, segment_size):
         with open(file_path) as f:
             lines = f.readlines()

@@ -10,7 +10,7 @@ from lightning.pytorch.callbacks import ModelCheckpoint
 
 import config as cfg
 from model import LitModule
-from dataset import TextAudioDataset
+from dataset import AudioDataset
 
 
 def main(args):
@@ -20,7 +20,7 @@ def main(args):
 
     seed_everything(cfg.train.seed)
 
-    train_ds = TextAudioDataset(
+    train_ds = AudioDataset(
         file_path=args.train_file, 
         wav_dir=args.wav_dir,
         segment_size=cfg.sample_segment_size
@@ -33,7 +33,7 @@ def main(args):
         num_workers=12,
         pin_memory=True
     )
-    valid_ds = TextAudioDataset(
+    valid_ds = AudioDataset(
         file_path=args.valid_file, 
         wav_dir=args.wav_dir,
         segment_size=cfg.sample_segment_size
