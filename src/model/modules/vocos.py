@@ -54,7 +54,7 @@ class Vocos(nn.Module):
         x = self.norm_last(x.transpose(1, 2)).transpose(1, 2)
         x = self.out_conv(x)
         mag, phase = x.chunk(2, dim=1)
-        mag = torch.exp(mag).clamp_max(max=1e2)
+        mag = mag.exp().clamp_max(max=1e2)
         s = mag * (phase.cos() + 1j * phase.sin())
         o = self.istft(s).unsqueeze(1)
         return o
