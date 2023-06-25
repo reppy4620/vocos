@@ -27,4 +27,12 @@ pip install torch torchaudio lightning pandas
 
 # Result
 
-WIP
+Some audio samples are in `asset/sample`.
+
+| loss | plot |
+| --- | --- |
+| Discriminator | ![](./asset/loss/disc.png) |
+| Generator | ![](./asset/loss/gen.png) |
+| Feature Matching | ![](./asset/loss/fm.png) |
+| Mel | ![](./asset/loss/mel.png) |
+

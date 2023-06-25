@@ -74,9 +74,9 @@ class DiscriminatorR(nn.Module):
     def __init__(
         self,
         resolution,
-        channels: int = 64,
-        in_channels: int = 1,
-        lrelu_slope: float = 0.1,
+        channels=64,
+        in_channels=1,
+        lrelu_slope=0.1,
     ):
         super().__init__()
         self.resolution = resolution
@@ -113,7 +113,7 @@ class DiscriminatorR(nn.Module):
             n_fft=n_fft,
             hop_length=hop_length,
             win_length=win_length,
-            window=None,  # interestingly rectangular window kind of works here
+            window=None,
             center=True,
             return_complex=True,
         ).abs()
