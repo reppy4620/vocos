@@ -45,11 +45,8 @@ def main(args):
         num_workers=12,
         pin_memory=True
     )
-
-    if (ckpt_dir / 'last.ckpt').exists():
-        lit_module = LitModule.load_from_checkpoint(ckpt_dir / 'last.ckpt', params=cfg)
-    else:
-        lit_module = LitModule(cfg)
+    
+    lit_module = LitModule(cfg)
 
     logger = CSVLogger(save_dir=out_dir, name='logs', version=1)
     ckpt_callback = ModelCheckpoint(
@@ -57,13 +54,19 @@ def main(args):
         every_n_epochs=cfg.train.save_ckpt_interval,
         save_last=True,
     )
+    ckpt_path = ckpt_dir / 'last.ckpt' if (ckpt_dir / 'last.ckpt').exists() else None
 
     trainer = Trainer(
         logger=logger,
         max_epochs=cfg.train.num_epoch,
         callbacks=[ckpt_callback]
     )
-    trainer.fit(model=lit_module, train_dataloaders=train_dl, val_dataloaders=valid_dl)
+    trainer.fit(
+        model=lit_module, 
+        train_dataloaders=train_dl, 
+        val_dataloaders=valid_dl,
+        ckpt_path=ckpt_path
+    )
 
 
 if __name__ == '__main__':
